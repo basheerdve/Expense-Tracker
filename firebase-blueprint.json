@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "Expense": {
+      "title": "Expense",
+      "description": "A single financial transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "amount": { "type": "number" },
+        "category": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "description": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "amount", "category", "date", "description", "userId"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "Monthly budget limit for a category",
+      "type": "object",
+      "properties": {
+        "category": { "type": "string" },
+        "limit": { "type": "number" },
+        "spent": { "type": "number" },
+        "userId": { "type": "string" }
+      },
+      "required": ["category", "limit", "spent", "userId"]
+    }
+  },
+  "firestore": {
+    "/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "List of user expenses"
+    },
+    "/budgets/{budgetId}": {
+      "schema": "Budget",
+      "description": "User budget settings"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Master Gate: Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // 2. Validation Blueprint for Expense
+    function isValidExpense(data) {
+      return data.keys().hasAll(['id', 'amount', 'category', 'date', 'description', 'userId'])
+        && data.keys().size() == 6
+        && data.id is string && data.id.size() <= 128
+        && data.amount is number && data.amount >= 0
+        && data.category is string && data.category.size() <= 64
+        && data.date is string && data.date.size() <= 128 // Basic size check for ISO format
+        && data.description is string && data.description.size() <= 500
+        && data.userId == request.auth.uid;
+    }
+
+    // 2. Validation Blueprint for Budget
+    function isValidBudget(data) {
+      return data.keys().hasAll(['category', 'limit', 'spent', 'userId'])
+        && data.keys().size() == 4
+        && data.category is string && data.category.size() <= 64
+        && data.limit is number && data.limit >= 0
+        && data.spent is number && data.spent >= 0
+        && data.userId == request.auth.uid;
+    }
+
+    // Path Rules
+    match /expenses/{expenseId} {
+      allow create: if isSignedIn() && isValidId(expenseId) && isValidExpense(request.resource.data);
+      allow update: if isSignedIn() && isValidId(expenseId) && isValidExpense(request.resource.data)
+                    && request.resource.data.userId == resource.data.userId
+                    && request.resource.data.id == resource.data.id;
+      allow delete: if isSignedIn() && isOwner(resource.data.userId);
+      allow get: if isSignedIn() && isOwner(resource.data.userId);
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    match /budgets/{budgetId} {
+      allow create: if isSignedIn() && isValidId(budgetId) && isValidBudget(request.resource.data);
+      allow update: if isSignedIn() && isValidId(budgetId) && isValidBudget(request.resource.data)
+                    && request.resource.data.userId == resource.data.userId;
+      allow delete: if isSignedIn() && isOwner(resource.data.userId);
+      allow get: if isSignedIn() && isOwner(resource.data.userId);
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+  }
+}

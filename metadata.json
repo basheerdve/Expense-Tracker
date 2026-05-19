@@ -1,0 +1,6 @@
+{
+  "name": "Expense Tracker",
+  "description": "A professional financial management suite with multi-currency support, AI-driven insights, secure authentication, and real-time budget tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
