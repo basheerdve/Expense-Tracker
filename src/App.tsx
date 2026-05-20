@@ -336,3 +336,33 @@ export default function App() {
           <DialogHeader><DialogTitle>Add Expense</DialogTitle></DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2"><Label>Amount</Label><Input type="number" place
+holder="0.00" value={newExpense.amount} onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })} /></div>
+            <div className="space-y-2"><Label>Category</Label>
+              <Select value={newExpense.category} onValueChange={(val: Category) => setNewExpense({ ...newExpense, category: val })}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>{CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2"><Label>Date</Label><Input type="date" value={newExpense.date} onChange={(e) => setNewExpense({ ...newExpense, date: e.target.value })} /></div>
+            <div className="space-y-2"><Label>Description</Label><Input placeholder="e.g. Starbucks" value={newExpense.description} onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })} /></div>
+          </div>
+          <DialogFooter><Button onClick={handleAddExpense} className="w-full bg-indigo-600">Add Expense</Button></DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={isAddMoneyModalOpen} onOpenChange={setIsAddMoneyModalOpen}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Add Money</DialogTitle></DialogHeader>
+          <div className="py-4"><Label>Amount</Label><Input type="number" placeholder="0.00" value={moneyToAdd} onChange={(e) => setMoneyToAdd(e.target.value)} /></div>
+          <DialogFooter><Button onClick={handleAddMoney} className="w-full bg-emerald-600">Confirm</Button></DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={isBudgetModalOpen} onOpenChange={setIsBudgetModalOpen}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Edit Budget — {editingBudget.category}</DialogTitle></DialogHeader>
+          <div className="py-4"><Label>New Limit ({currencySymbol})</Label><Input type="number" value={editingBudget.limit} onChange={(e) => setEditingBudget({ ...editingBudget, limit: e.target.value })} /></div>
+          <DialogFooter><Button onClick={handleUpdateBudget} className="w-full">Save</Button></DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
