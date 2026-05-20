@@ -38,9 +38,9 @@ import {
   CardHeader, 
   CardTitle,
   CardFooter
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+} from './components/ui/card';
+import { Button } from './components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { 
   Dialog, 
   DialogContent, 
@@ -49,18 +49,18 @@ import {
   DialogHeader, 
   DialogTitle, 
   DialogTrigger 
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from './components/ui/dialog';
+import { Input } from './components/ui/input';
+import { Label } from './components/ui/label';
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from '@/components/ui/select';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
+} from './components/ui/select';
+import { Progress } from './components/ui/progress';
+import { Badge } from './components/ui/badge';
 import { 
   Table, 
   TableBody, 
@@ -68,7 +68,7 @@ import {
   TableHead, 
   TableHeader, 
   TableRow 
-} from '@/components/ui/table';
+} from './components/ui/table';
 import { 
   BarChart, 
   Bar, 
