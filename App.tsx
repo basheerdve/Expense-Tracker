@@ -88,7 +88,7 @@ import {
 import { format, subDays, startOfMonth, endOfMonth, isWithinInterval, startOfYear, eachMonthOfInterval } from 'date-fns';
 import Markdown from 'react-markdown';
 import { type Expense, type Budget, type Category, CATEGORIES, CATEGORY_COLORS, CURRENCIES, LANGUAGES, type Currency, type Language } from './types';
-import { cn } from '@/lib/utils';
+import { cn } from './lib/utils';
 import appLogo from './assets/images/app_logo_1779182924903.png';
 
 // Mock Data
