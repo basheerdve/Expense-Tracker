@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { Plus, Wallet, PieChart as PieChartIcon, History, Settings, TrendingUp, TrendingDown, AlertCircle, ArrowUpRight, ArrowDownRight, Filter, Sparkles, Loader2, Trash2, CircleDollarSign, Calendar, ChevronRight, Globe, LifeBuoy, ShieldCheck, ShieldX, CreditCard, LogOut, Languages } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -12,7 +11,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line, AreaChart, Area } from 'recharts';
-import { format, subDays, startOfMonth, endOfMonth, isWithinInterval, startOfYear, eachMonthOfInterval } from 'date-fns';
+import { format, subDays, startOfMonth, endOfMonth, isWithinInterval } from 'date-fns';
 import Markdown from 'react-markdown';
 import { type Expense, type Budget, type Category, CATEGORIES, CATEGORY_COLORS, type Currency, type Language } from './types';
 import { cn } from '@/lib/utils';const CURRENCIES = [
@@ -23,13 +22,6 @@ import { cn } from '@/lib/utils';const CURRENCIES = [
   { code: 'INR', symbol: '₹', name: 'Indian Rupee' },
   { code: 'AED', symbol: 'د.إ', name: 'UAE Dirham' },
   { code: 'SAR', symbol: '﷼', name: 'Saudi Riyal' },
-];
-
-const LANGUAGES = [
-  { code: 'en', name: 'English' },
-  { code: 'ur', name: 'Urdu' },
-  { code: 'ar', name: 'Arabic' },
-  { code: 'fr', name: 'French' },
 ];
 
 const INITIAL_EXPENSES: Expense[] = [
@@ -206,7 +198,6 @@ export default function App() {
           </button>
         </div>
       </aside>
-
       <main className="flex-1 flex flex-col overflow-hidden">
         <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0">
           <h1 className="text-2xl font-bold text-slate-800 capitalize">{activeTab}</h1>
@@ -222,7 +213,6 @@ export default function App() {
             </Button>
           </div>
         </header>
-
         <div className="flex-1 p-8 overflow-y-auto">
           {activeTab === 'dashboard' && (
             <div className="space-y-6">
@@ -252,7 +242,6 @@ export default function App() {
               )}
             </div>
           )}
-
           {activeTab === 'history' && (
             <Card>
               <div className="p-6 border-b"><h3 className="font-bold text-lg">Transactions</h3></div>
@@ -274,7 +263,6 @@ export default function App() {
               </table>
             </Card>
           )}
-
           {activeTab === 'budget' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {budgets.map(budget => {
@@ -300,7 +288,6 @@ export default function App() {
               })}
             </div>
           )}
-
           {activeTab === 'settings' && (
             <div className="max-w-2xl space-y-6">
               <Card className="p-6">
@@ -317,7 +304,6 @@ export default function App() {
               </Card>
             </div>
           )}
-
           {activeTab === 'help' && (
             <div className="max-w-2xl space-y-6">
               {[{ title: 'Video Tutorials', icon: '📺', desc: 'Watch guides on budgeting.' }, { title: 'Support', icon: '📞', desc: 'Contact our team.' }, { title: 'Community', icon: '🤝', desc: 'Join 50k+ users.' }].map(item => (
@@ -330,13 +316,11 @@ export default function App() {
           )}
         </div>
       </main>
-
       <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
         <DialogContent>
           <DialogHeader><DialogTitle>Add Expense</DialogTitle></DialogHeader>
           <div className="space-y-4 py-4">
-            <div className="space-y-2"><Label>Amount</Label><Input type="number" place
-holder="0.00" value={newExpense.amount} onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })} /></div>
+            <div className="space-y-2"><Label>Amount</Label><Input type="number" placeholder="0.00" value={newExpense.amount} onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })} /></div>
             <div className="space-y-2"><Label>Category</Label>
               <Select value={newExpense.category} onValueChange={(val: Category) => setNewExpense({ ...newExpense, category: val })}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
