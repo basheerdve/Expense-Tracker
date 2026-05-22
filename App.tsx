@@ -89,7 +89,6 @@ import { format, subDays, startOfMonth, endOfMonth, isWithinInterval, startOfYea
 import Markdown from 'react-markdown';
 import { type Expense, type Budget, type Category, CATEGORIES, CATEGORY_COLORS, CURRENCIES, LANGUAGES, type Currency, type Language } from './types';
 import { cn } from './lib/utils';
-import appLogo from './assets/images/app_logo_1779182924903.png';
 
 // Mock Data
 const INITIAL_EXPENSES: Expense[] = [
@@ -312,8 +311,8 @@ export default function App() {
         >
           <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
             <div className="p-8 text-center bg-slate-900 text-white">
-              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 overflow-hidden shadow-lg shadow-indigo-500/20">
-                <img src={appLogo} alt="Expense Tracker Logo" className="w-full h-full object-cover" />
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-500/20">
+                <Wallet className="w-8 h-8 text-indigo-600" />
               </div>
               <h1 className="text-2xl font-bold tracking-tight">Expense Tracker</h1>
               <p className="text-slate-400 text-sm mt-1">{authMode === 'login' ? 'Welcome back to your wealth portal' : 'Start your journey to financial freedom'}</p>
@@ -400,8 +399,8 @@ export default function App() {
       <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col hidden md:flex shrink-0">
         <div className="p-6 border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden shadow-lg shadow-indigo-500/10">
-              <img src={appLogo} alt="Logo" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/10">
+              <Wallet className="w-6 h-6 text-indigo-600" />
             </div>
             <span className="text-xl font-bold text-white tracking-tight">Expense Tracker</span>
           </div>
