@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Plus, Wallet, PieChart as PieChartIcon, History, Settings, TrendingUp, TrendingDown, AlertCircle, ArrowUpRight, ArrowDownRight, Filter, Sparkles, Loader2, Trash2, CircleDollarSign, Calendar, ChevronRight, Globe, LifeBuoy, ShieldCheck, ShieldX, CreditCard, LogOut, Languages } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-// import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
